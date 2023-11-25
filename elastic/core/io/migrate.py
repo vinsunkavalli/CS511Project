@@ -44,7 +44,7 @@ def migrate(graph: DependencyGraph, shell: ZMQInteractiveShell, vss_to_migrate: 
             temp_dict[vs2].add(vs1)
         else:
             # create new entry
-            new_set = (vs1, vs2)
+            new_set = {vs1, vs2} 
             temp_dict[vs1] = new_set
             temp_dict[vs2] = new_set
 
@@ -84,4 +84,4 @@ def migrate(graph: DependencyGraph, shell: ZMQInteractiveShell, vss_to_migrate: 
     #    print("Checkpoint saved to:", filename)
     #    adapter.write_all(Path(filename), metadata)
     #else:
-       # adapter.write_all(Path(FILENAME), metadata)
+        # adapter.write_all(Path(FILENAME), metadata)
