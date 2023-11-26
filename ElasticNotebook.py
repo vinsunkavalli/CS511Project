@@ -186,7 +186,10 @@ class ElasticNotebook(Magics):
         # Update total recordevent time tally.
         infer_end = time.time()
         self.total_recordevent_time += infer_end - infer_start
-        
+
+        # Perform checkpointing
+        self.perform_checkpoint(checkpoint_data, 'checkpoints/enhanced_checkpoint.pickle')
+
     @line_magic
     def RecordEventOneLine(self, cell):
         """
@@ -270,9 +273,6 @@ class ElasticNotebook(Magics):
         # Update total recordevent time tally.
         infer_end = time.time()
         self.total_recordevent_time += infer_end - infer_start
-
-        # Perform checkpointing
-        self.perform_checkpoint(checkpoint_data, 'checkpoints/enhanced_checkpoint.pickle')
 
     def serialize_variable_state(self, user_ns):
         """
