@@ -30,3 +30,19 @@ polars~=0.14.24
 
 seaborn~=0.12.2
 lightgbm~=3.3.5
+# below are for some notebooks dependencies
+scikit-image
+keras
+tensorflow
+wordcloud
+plotly
+tqdm
+ipywidgets
+# dependencies for elastic/examples notebook
+pympler
+xxhash
+findspark
+
+# testing dependencies
+dill
+zlib==1.2.11

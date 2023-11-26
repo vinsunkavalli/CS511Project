@@ -110,5 +110,5 @@ class OptimizerExact(Selector):
         # Determine the replication plan from the partition.
         vss_to_migrate = set(partition[1]).intersection(self.active_vss)
         ces_to_recompute = set(partition[0]).intersection(self.dependency_graph.cell_executions)
-         
+
         return vss_to_migrate, ces_to_recompute

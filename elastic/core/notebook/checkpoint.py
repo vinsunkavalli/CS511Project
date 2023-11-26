@@ -1,3 +1,4 @@
+import pickle
 import time
 from typing import Dict
 
@@ -13,8 +14,9 @@ from elastic.core.mutation.object_hash import UnserializableObj
 
 
 def checkpoint(graph: DependencyGraph, shell: ZMQInteractiveShell, fingerprint_dict: Dict,
-               selector: Selector, udfs: set, filename: str, profile_dict, write_log_location=None, notebook_name=None,
-               optimizer_name=None):
+                selector: Selector, udfs: set, filename: str, profile_dict,
+                write_log_location=None, notebook_name=None, optimizer_name=None,
+                checkpoint_data=None):
     """
         Checkpoints the notebook. The optimizer selects the VSs to migrate and recompute and the OEs to recompute, then
         writes the checkpoint as the specified filename.
@@ -27,6 +29,7 @@ def checkpoint(graph: DependencyGraph, shell: ZMQInteractiveShell, fingerprint_d
             write_log_location (str): location to write component runtimes to. For experimentation only.
             notebook_name (str): notebook name. For experimentation only.
             optimizer_name (str): optimizer name. For experimentation only.
+            checkpoint_data (dict): The data captured during the RecordEvent, containing the serialized state of the variables and the execution context.
     """
     profile_start = time.time()
 
@@ -112,6 +115,13 @@ def checkpoint(graph: DependencyGraph, shell: ZMQInteractiveShell, fingerprint_d
     # Store the notebook checkpoint to the specified location.
     migrate_start = time.time()
     migrate_success = True
+
+    if checkpoint_data:
+        # Append checkpoint_data to the file where other checkpoint-related data is stored
+        with open(filename, 'wb') as f:
+            # protocol: https://docs.python.org/3/library/pickle.html#data-stream-format
+            pickle.dump(checkpoint_data, f, protocol=pickle.HIGHEST_PROTOCOL)
+
     migrate(graph, shell, vss_to_migrate, vss_to_recompute, ces_to_recompute, udfs, selector.recomputation_ces, selector.overlapping_vss, filename)
     migrate_end = time.time()
 

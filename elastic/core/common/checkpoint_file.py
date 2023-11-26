@@ -113,10 +113,10 @@ class CheckpointFile:
     @staticmethod
     def from_json(kv: Dict):
         return CheckpointFile().with_dependency_graph(kv[KEY_DEPENDENCY_GRAPH])\
-                                  .with_variables(kv[KEY_VARIABLES])\
-                                  .with_vss_to_migrate(kv[KEY_VSS_TO_MIGRATE])\
-                                  .with_vss_to_recompute(kv[KEY_VSS_TO_RECOMPUTE])\
-                                  .with_ces_to_recompute(kv[KEY_CES_TO_RECOMPUTE])\
-                                  .with_recomputation_ces(kv[KEY_RECOMPUTATION_CES])\
-                                  .with_serialization_order(kv[KEY_SERIALIZATION_ORDER])\
-                                  .with_udfs(kv[KEY_UDFS])
+                                .with_variables(kv[KEY_VARIABLES])\
+                                .with_vss_to_migrate(kv[KEY_VSS_TO_MIGRATE])\
+                                .with_vss_to_recompute(kv[KEY_VSS_TO_RECOMPUTE])\
+                                .with_ces_to_recompute(kv[KEY_CES_TO_RECOMPUTE])\
+                                .with_recomputation_ces(kv[KEY_RECOMPUTATION_CES])\
+                                .with_serialization_order(kv[KEY_SERIALIZATION_ORDER])\
+                                .with_udfs(kv[KEY_UDFS])

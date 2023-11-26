@@ -8,8 +8,8 @@ from elastic.core.graph.graph import DependencyGraph
 
 
 def restore_notebook(graph: DependencyGraph, shell: ZMQInteractiveShell,
-                     variables: dict, ces_to_recompute: set, write_log_location=None, notebook_name=None,
-                     optimizer_name=None):
+                        variables: dict, ces_to_recompute: set, write_log_location=None, notebook_name=None,
+                        optimizer_name=None):
     """
         Restores the notebook. Declares variables back into the kernel and recomputes the CEs to restore non-migrated
         variables.

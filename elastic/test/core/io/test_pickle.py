@@ -18,7 +18,7 @@ class TestPickle(unittest.TestCase):
         
     def test_is_picklable_pandas(self):
         df = pd.DataFrame(np.array([[1, 2, 3], [4, 5, 6], [7, 8, 9]]),
-                          columns=['a', 'b', 'c'])
+                            columns=['a', 'b', 'c'])
         self.assertTrue(is_picklable(df))
         
         df_pickled = pickle.dumps(df)

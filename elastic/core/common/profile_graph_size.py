@@ -5,10 +5,10 @@ import sys
 
 def profile_graph_size(graph: DependencyGraph):
     """
-       Profiles the in-memory size of a dependency graph of Elastic Notebook.
-       For experiments only.
-       Args:
-           graph (DependencyGraph): dependency graph to profile.
+        Profiles the in-memory size of a dependency graph of Elastic Notebook.
+        For experiments only.
+        Args:
+            graph (DependencyGraph): dependency graph to profile.
     """
 
     # Tally fields in graph
