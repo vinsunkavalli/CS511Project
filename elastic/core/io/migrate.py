@@ -80,8 +80,8 @@ def migrate(graph: DependencyGraph, shell: ZMQInteractiveShell, vss_to_migrate: 
                 obj_list.append(shell.user_ns[vs.name])
             dill.dump(obj_list, output_file)
     # Write the JSON file to the specified location. Uses the default location if a file path isn't specified.
-    #if filename:
+    # if filename:
     #    print("Checkpoint saved to:", filename)
     #    adapter.write_all(Path(filename), metadata)
-    #else:
-        # adapter.write_all(Path(FILENAME), metadata)
+    # else:
+    #     adapter.write_all(Path(FILENAME), metadata)

@@ -12,6 +12,7 @@ import zlib # We compress the serialized data using zlib to make the checkpoint 
 
 from IPython import get_ipython
 from IPython.core.magic import (Magics, magics_class, cell_magic, line_magic)
+import pyspark
 from elastic.algorithm.selector import OptimizerType
 
 from elastic.core.common.profile_migration_speed import profile_migration_speed
@@ -187,7 +188,7 @@ class ElasticNotebook(Magics):
         self.total_recordevent_time += infer_end - infer_start
 
         # Perform checkpointing
-        self.perform_checkpoint(checkpoint_data, 'enhanced_checkpoint.pickle')
+        self.perform_checkpoint(checkpoint_data, 'checkpoints/enhanced_checkpoint.pickle')
 
     def serialize_variable_state(self, user_ns):
         """
@@ -195,14 +196,14 @@ class ElasticNotebook(Magics):
         """
         serialized_vars = {}
         for var, obj in user_ns.items():
+            if isinstance(obj, pyspark.SparkContext):
+                continue  # Skip serialization of SparkContext
             try:
-                # https://docs.python.org/3/library/zlib.html#zlib.compress for compression level
                 serialized_vars[var] = zlib.compress(dill.dumps(obj), 1)
             except (TypeError, dill.PicklingError):
-                # Handle the object that cannot be serialized,
-                # perhaps by storing a string representation or simply skipping it.
                 serialized_vars[var] = "Non-serializable object of type: {}".format(type(obj))
         return serialized_vars
+
 
     def capture_execution_context(self, cell=''):
         """
