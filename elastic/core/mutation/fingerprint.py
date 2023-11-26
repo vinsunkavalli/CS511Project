@@ -9,7 +9,7 @@ from types import FunctionType
 from collections.abc import Iterable
 
 BASE_TYPES = [str, int, float, bool, type(None), FunctionType, ImmutableObj, UncomparableObj, NoneObj, NxGraphObj,
-              TorchTensorObj, ModuleObj, UnserializableObj, NpArrayObj, ScipyArrayObj, DataframeObj]
+                TorchTensorObj, ModuleObj, UnserializableObj, NpArrayObj, ScipyArrayObj, DataframeObj]
 
 
 def base_typed(obj, visited):

@@ -42,3 +42,7 @@ ipywidgets
 pympler
 xxhash
 findspark
+
+# testing dependencies
+dill
+zlib==1.2.11

@@ -21,11 +21,11 @@ def get_problem_setting():
     """
         Returns the graph containing the test problem setting for the optimizers.
         (cost:2) "x"  "y" (cost: 2)
-             c3   |    |  c2
-                 "z" "z"
-                   "z"
-                    | c1 (cost: 3)
-                   []
+            c3   |    |  c2
+                "z" "z"
+                "z"
+                | c1 (cost: 3)
+                []
     """
     graph = DependencyGraph()
 
