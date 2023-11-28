@@ -407,6 +407,21 @@ class ElasticNotebook(Magics):
         # Recompute missing VSs and redeclare variables into the kernel.
         restore_notebook(self.dependency_graph, self.shell, variables, oes_to_recompute, self.write_log_location,
                             self.notebook_name, self.optimizer_name)
+        
+    @line_magic
+    def Log(self, filename=''):
+        """
+            %Log
+        """
+        if self.write_log_location:
+            with open(self.write_log_location + '/output_' + self.notebook_name + '_' +
+                        self.optimizer_name + '.txt', 'a') as f:
+                f.write('comparison overhead - ' + repr(asizeof.asizeof(self.dependency_graph) +
+                                                        asizeof.asizeof(self.fingerprint_dict)) + ' bytes' + '\n')
+                f.write('notebook overhead - ' + repr(asizeof.asizeof(self.shell.user_ns)) + ' bytes' + '\n')
+                f.write('Dependency graph storage overhead - ' + repr(profile_graph_size(self.dependency_graph)) +
+                        " bytes" + '\n')
+                f.write('Cell monitoring overhead - ' + repr(self.total_recordevent_time) + " seconds" + '\n')
 
 
 def load_ipython_extension(ipython):
