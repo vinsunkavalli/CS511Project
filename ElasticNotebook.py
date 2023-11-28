@@ -283,6 +283,7 @@ class ElasticNotebook(Magics):
             if isinstance(obj, pyspark.SparkContext):
                 continue  # Skip serialization of SparkContext
             try:
+                # https://docs.python.org/3/library/zlib.html#zlib.compress for compression level
                 serialized_vars[var] = zlib.compress(dill.dumps(obj), 1)
             except (TypeError, dill.PicklingError):
                 serialized_vars[var] = "Non-serializable object of type: {}".format(type(obj))
